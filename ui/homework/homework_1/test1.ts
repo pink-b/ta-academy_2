@@ -5,6 +5,9 @@
 
 type Person = {
   occupation?: string;
+  age: number | string;
+  name: string;
+  isSuperHero?: boolean;
 };
 
 const users: Person[] = [
