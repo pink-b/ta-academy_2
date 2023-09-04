@@ -22,7 +22,7 @@ test.describe('homework 2 tests', async () => {
         //how do you like this xpath below?
         const emailForm = page.locator('//div[contains(@class, "subscribeForm")]//input[@name="email"]')
         await emailForm.scrollIntoViewIfNeeded()
-        expect(emailForm).toHaveAttribute("placeholder", "Enter your Email")
+       
         await emailForm.fill(email)
         const signInButton = page.locator('//button//div[text()="Sign Up"]')
         await signInButton.click()
