@@ -68,7 +68,9 @@ test.describe('homework 2 tests', async () => {
         const productId = await product.getAttribute('data-test-id');
         //Может лучше использовать такой? [data-testid="myPickWrapper"]
         //Но проблема в том что он отмечает не 1 первый элемент который нам нужен
-        // а несколько, вопрос: нужно всегда 
+        // а несколько, вопрос: нужно всегда искать элемент 
+        //именно получать запрос на его уникальность или можно и не так
+        //надеюсь понятно объяснил)))
         await myPick.scrollIntoViewIfNeeded()
         await myPick.click();
         await test.step('event should fire after scroll to the section', async () => {
