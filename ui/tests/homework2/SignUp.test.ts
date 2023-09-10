@@ -1,7 +1,7 @@
 import { test, expect } from '@Test';
-import { faker } from '@faker-js/faker'
+import { faker } from '@faker-js/faker';
 
-test.describe('homework 2 tests', async () => {
+test.describe('Sign up on home page test', async () => {
     test.beforeEach(async ({page, baseURL}) => {
         await page.context().addCookies([
             {
@@ -13,16 +13,14 @@ test.describe('homework 2 tests', async () => {
         await page.goto('/', { waitUntil: 'domcontentloaded' });
     });
 
-    test('Fill email and click Sign Up button on Home page', async ({page, baseURL, dataLayer}) => {
+    test('Fill email and click Sign Up button on Home page', async ({page, baseURL, dataLayer, homePage}) => {
         const email = faker.internet.email();
-        //how do you like this xpath below?
-        const emailForm = page.locator('//div[contains(@class, "subscribeForm")]//input[@name="email"]')
+        await page.waitForLoadState('load');
+        const emailForm = await page.locator('//div[contains(@class, "subscribeForm")]//input[@name="email"]')
         await emailForm.scrollIntoViewIfNeeded()
-       
         await emailForm.fill(email)
-        const signInButton = page.locator('//button//div[text()="Sign Up"]')
+        const signInButton = await page.locator('//div[text()="Sign Up"]')
         await signInButton.click()
-        const a = console.log(await page.evaluate(() => window.dataLayer));
         await test.step('event should fire after scroll to the section', async () => {
             const expectedEvent = {
                 "event": "GeneralInteraction",
@@ -38,11 +36,8 @@ test.describe('homework 2 tests', async () => {
             });
 
             expect(event).toStrictEqual(expectedEvent);
-      
-            const a = console.log(await page.evaluate(() => window.dataLayer));
         });
     })
 
-    
-})
 
+})
