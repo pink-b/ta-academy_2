@@ -1,6 +1,6 @@
 import { test, expect } from '@Test';
 
-test.describe('dsaf', async () => {
+test.describe('Check wish list', async () => {
     test.beforeEach(async ({ page, baseURL }) => {
         await page.context().addCookies([
             {
