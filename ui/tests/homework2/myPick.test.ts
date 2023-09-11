@@ -1,4 +1,5 @@
 import { test, expect } from '@Test';
+import { faker } from '@faker-js/faker';
 
 test.describe('Check wish list', async () => {
     test.beforeEach(async ({ page, baseURL }) => {
@@ -11,12 +12,11 @@ test.describe('Check wish list', async () => {
         ]);
         await page.goto('/', { waitUntil: 'domcontentloaded' });
     });
-
     test("Click 'My pick' in product card and check that button is clicked in sunglasses page", async ({
-                                                                                                           page,
-                                                                                                           baseURL,
-                                                                                                           dataLayer,
-                                                                                                       }) => {
+        page,
+        baseURL,
+        dataLayer,
+    }) => {
         const button = await page.locator('//header//a[contains(., "Sunglasses")]');
         await button.click();
         await page.waitForLoadState('load');
@@ -25,6 +25,7 @@ test.describe('Check wish list', async () => {
             const url = page.url();
             expect(url).toBe(`${baseURL}sunglasses`);
         });
+
         const myPick = await page.locator('(//div[@data-testid="myPickWrapper"])[1]');
         const product = await page.locator('[data-test-name="product"]').first();
         const productId = await product.getAttribute('data-test-id');
