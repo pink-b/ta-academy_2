@@ -16,7 +16,6 @@ test.describe('Check registration', () => {
         dataLayer,
     }) => {
         await homePage.open();
-        await page.waitForLoadState('load');
         await homePage.Header.clickCreateAccount();
         await homePage.RegistrationForm.fillEmail();
         await homePage.RegistrationForm.submitForm();

@@ -3,9 +3,11 @@ import type { Locator } from '@playwright/test';
 
 export class Header extends Component {
     protected LOCATORS = {
-        myAccountDropDownMenu: this.page.locator('//li[contains(., "My Account")]'),
+        myAccountDropDownMenu: this.locator.locator('//button[contains (., "My Account")]'),
         myAccountBtn: this.locator.locator('//button[contains (., "My Account")]'),
-        createAccountButton: this.locator.locator('//a[contains(., "Create Account")]'),
+        createAccountButton: this.locator.locator(
+            '//div[@class="sc-cxxPmc eoeUCM myAccountAndOrders__tooltipContainer___32Rpc"]//a[contains(., "Create Account")]'
+        ),
         welcomeBtn: this.locator.locator('//button[contains (., "Welcome")]'),
         accountLink: this.locator.locator(
             '//a[contains(@href, "/customer/account")][text()="My Account"]'
@@ -16,21 +18,16 @@ export class Header extends Component {
         wishListBtn: this.locator.locator('//button[div[contains(@aria-label, "View My Picks")]]'),
     };
 
-    public async clickToCreateAccountButton(): Promise<void> {
+    /* public async clickToCreateAccountButton(): Promise<void> {
         await this.LOCATORS.createAccountButton.click();
     }
 
     public async clickToMyAccountButton(): Promise<void> {
         await this.LOCATORS.myAccountDropDownMenu.click();
-    }
-
-    public async moveToSunglassesPage(): Promise<void> {
-        // await this.LOCATORS.
-    }
+    }*/
 
     public async clickCreateAccount(): Promise<void> {
-        await this.LOCATORS.myAccountBtn.click();
-        await this.LOCATORS.createAccountButton.waitFor({ state: 'visible' });
+        await this.LOCATORS.myAccountDropDownMenu.hover();
         await this.LOCATORS.createAccountButton.click();
     }
 

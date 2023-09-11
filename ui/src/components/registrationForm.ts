@@ -1,5 +1,5 @@
 import { Component } from '@Core/component';
-import {faker} from '@faker-js/faker'
+import { faker } from '@faker-js/faker';
 
 export class RegistrationForm extends Component {
     private LOCATORS = {

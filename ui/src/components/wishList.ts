@@ -6,16 +6,16 @@ export class WishList extends Component {
         firstSunglass: this.page.locator('(//div[@data-testid="myPickWrapper"])[1]'),
         product: this.page.locator('[data-test-name="product"]'),
         wishBtn: this.page.locator('//div[@aria-label="View My Picks"]'),
-        productId: this.page.locator('//div[@data-productid]')
+        productId: this.page.locator('//div[@data-productid]'),
     };
 
     protected ATTRIBUTES = {
-        itemAttribute: 'data-productid'
-    }
+        itemAttribute: 'data-productid',
+    };
 
     public async getProductIdInWishList(): Promise<string> {
-        await this.LOCATORS.wishBtn.click()
-        const itemId = await this.LOCATORS.productId.getAttribute(this.ATTRIBUTES.itemAttribute)
-        return await itemId || 'Error, no itemId';
+        await this.LOCATORS.wishBtn.click();
+        const itemId = await this.LOCATORS.productId.getAttribute(this.ATTRIBUTES.itemAttribute);
+        return itemId || 'Error, no itemId';
     }
 }
