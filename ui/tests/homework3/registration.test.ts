@@ -67,7 +67,6 @@ test.describe('Check registration', () => {
                 firstName: await accountPage.myAccountDetails.getFirstName(),
                 lastName: await accountPage.myAccountDetails.getLastName(),
             };
-            console.log(JSON.stringify(testData) + ' and ' + JSON.stringify(detailValues));
             expect(testData).toEqual(detailValues);
         });
     });
