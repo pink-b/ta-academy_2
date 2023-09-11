@@ -12,6 +12,7 @@
     "debug": "yarn test --debug"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "deep-match2": "^1.0.1",
