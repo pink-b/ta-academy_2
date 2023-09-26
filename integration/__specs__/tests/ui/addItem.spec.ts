@@ -2,6 +2,7 @@ import { Mock } from '@Core/mock';
 import { CartPage } from '@Components/cartPage/cartPage';
 import { GetCartItemsMock } from '@Mocks/api/mockio/v1/id/get';
 import { faker } from '@faker-js/faker';
+import {waitForDataLayer} from "@Utils/dataLayer";
 
 describe('Check adding a new item to cart', () => {
     const mock = Mock.getInstance();
@@ -24,6 +25,10 @@ describe('Check adding a new item to cart', () => {
         const cartItemsLength = await cartList.getCartItemsCount();
 
         await cartPage.clickAddCartItemBtn();
+        reporter.startStep('');
+        let event = {name: 'FormInteraction', value: 'Open'}
+        expect(await waitForDataLayer(event)).toStrictEqual(event)
+        reporter.endStep();
 
         const cartModal = await cartPage.getModal();
         const cartForm = cartModal.getForm();
@@ -36,6 +41,10 @@ describe('Check adding a new item to cart', () => {
         cartForm.fillForm(productName, productPrice, productQuantity);
         await cartForm.submitForm();
 
+        reporter.startStep('')
+        event = {name: `Add item - ${productName}`, value: `${productName}`}
+        expect(await waitForDataLayer(event)).toStrictEqual(event)
+        reporter.endStep()
         const updatedCartItemsLength = await cartList.getCartItemsCount();
 
         reporter.startStep('Item quantity should be increased by one');
@@ -61,6 +70,10 @@ describe('Check adding a new item to cart', () => {
 
         await item.deleteItem();
 
+        reporter.startStep('')
+        event = {name: `Delete item - ${productName}`, value: `${productName}`}
+        expect(event).toStrictEqual(event)
+        reporter.endStep()
         const finalCartItemsLength = await cartList.getCartItemsCount();
 
         reporter.startStep('Cart items length should be back to original');
